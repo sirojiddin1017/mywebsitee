@@ -33,6 +33,7 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
+    'active_link',
     'home.apps.HomeConfig',
     'course.apps.CourseConfig',
     'django.contrib.admin',

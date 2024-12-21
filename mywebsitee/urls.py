@@ -24,9 +24,12 @@ from course import views as c_views
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('home/', h_views.index ),
-     path('',h_views.index ),
-    path('course/',c_views.index),
+    path('home/', h_views.index, name='home' ),
+     path('',h_views.index, name ='home' ),
+    path('course/',c_views.index, name = 'course'),
+    path('about/', h_views.about, name = 'about'),
+    path('contact/',h_views.contact, name ='contact'),
+
 
 
 
