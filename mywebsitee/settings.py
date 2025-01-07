@@ -12,7 +12,7 @@ https://docs.djangoproject.com/en/5.1/ref/settings/
 import os.path
 from pathlib import Path
 
-from django.conf.global_settings import MEDIA_URL, MEDIA_ROOT
+from django.conf.global_settings import MEDIA_URL, MEDIA_ROOT, LANGUAGE_CODE
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -52,6 +52,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'django.middleware.locale.LocaleMiddleware',
 ]
 
 ROOT_URLCONF = 'mywebsitee.urls'
@@ -107,12 +108,22 @@ AUTH_PASSWORD_VALIDATORS = [
 
 # Internationalization
 # https://docs.djangoproject.com/en/5.1/topics/i18n/
+LANGUAGES=[
+    ('ru','Russian'),
+    ('uz','Uzbek'),
+    ('en','English'),
+]
+LOCALE_PARHS = (
+    os.path.join(BASE_DIR,'/home/locale'),
+)
 
 LANGUAGE_CODE = 'en-us'
 
 TIME_ZONE = 'UTC'
 
 USE_I18N = True
+
+
 
 USE_TZ = True
 
