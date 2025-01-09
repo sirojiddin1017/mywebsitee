@@ -57,3 +57,18 @@ class ContactForm(ModelForm):
             'message': Textarea(attrs={'class': 'input', 'placeholder': 'Your Message', 'rows': '5'}),
         }
 
+class Language(models.Model):
+    name=models.CharField(max_length=20)
+    codde=models.CharField(max_length=5)
+    status=models.BooleanField()
+    create_at = models.DateTimeField(auto_now_add=True)
+    update_at = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self):
+        return self.name
+
+llist = Language.objects.all()
+list1=[]
+for rs in llist:
+    list1.append((rs.code,rs.name))
+langlist=(list1)

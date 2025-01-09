@@ -1,6 +1,7 @@
 from gettext import translation
 
 from django.conf import settings
+from django.contrib.sites import requests
 from django.shortcuts import render
 from django.http import HttpResponse, HttpResponseRedirect
 from twisted.conch.ssh.connection import messages
@@ -8,6 +9,7 @@ from django.contrib import messages
 
 from course.models import Course, Subject, Tutor
 from .models import Setting, ContactForm, ContactMessage
+from ..models import SettingLang
 
 
 # Create your views here.
@@ -17,6 +19,12 @@ def index(request):
     course = Course.objects.all()
     course_cr = Course.objects.all().order_by('id')[:4]
     subject_cr = Subject.objects.all().order_by('id')[:3]
+    defaultlang=settings.LANGUAGE_CODE[0:2]
+    currentlang=request.LANGUAGE_CODE[0:2]
+    if defaultlang != currentlang:
+        setting = SettingLang.objects.get(lang=currentlang)
+        # subject_cr = SubjectLang.ojects.filter(lang=currentlang).order_by('id')
+        # tutors_cr = TutorLang.objects.filter(lang=currentlang).order_by('id')
     tutor_cr = Tutor.objects.all().order_by('id')[:3]
     context = {'setting':setting,
                'course_cr':course_cr,
@@ -77,5 +85,7 @@ def selectlanguage(request):
 
         lang = request.POST['language']
         translation.activate(lang)
-        request.session(settings.LANGUAGE_COOKIE_NAME)=lang
+        requests.session(settings.LANGUAGE_COOKIE_NAME)=lang
         return HttpResponseRedirect('/'+lang)
+
+
